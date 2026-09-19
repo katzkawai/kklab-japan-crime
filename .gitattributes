@@ -1,0 +1,7 @@
+# Preserve official downloads byte-for-byte for SHA-256 verification.
+data/raw/** -text -diff
+# CSV files use the standard CRLF record separator, including Excel downloads.
+*.csv -text whitespace=cr-at-eol
+# Compiled HTML is committed for static hosting; whitespace comes from the compiler.
+docs/index.html -whitespace linguist-generated=true
+docs/snapshot.*.json linguist-generated=true

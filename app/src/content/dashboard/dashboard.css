@@ -1,0 +1,37 @@
+.crime-page { color: var(--text); padding-top: 8px; }
+.crime-page p { line-height: 1.85; }
+.crime-page a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.crime-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--secondary); font-size: 12px; margin-bottom: 20px; }
+.crime-kpis { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 12px; }
+.crime-reading { margin-top: 24px; padding: 4px 0 4px 18px; border-left: 3px solid var(--chart-1); }
+.crime-reading p { margin: 0; font-size: 15px; }
+.crime-reading strong { color: var(--chart-1); margin-right: .4em; }
+.crime-note { color: var(--secondary); font-size: 12px; margin: 12px 0 0; line-height: 1.85; }
+.crime-chart-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 11px; color: var(--secondary); margin-top: 12px; }
+.crime-small-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.crime-mini-value { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 14px; }
+.crime-mini-value b { font-size: 24px; font-variant-numeric: tabular-nums; font-weight: 650; letter-spacing: -.6px; }
+.crime-mini-value small { font-size: 12px; margin-left: 6px; font-weight: 400; color: var(--secondary); }
+.crime-mini-value span { font-size: 11px; color: var(--secondary); }
+.crime-caution { background: color-mix(in srgb,var(--chart-4) 6%,var(--background)); border-left: 3px solid var(--chart-4); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 12px; line-height: 1.85; }
+.crime-source-list article { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+.crime-source-list article > span { color: var(--chart-1); font-variant-numeric: tabular-nums; font-size: 13px; padding-top: 4px; }
+.crime-source-list h3 { margin: 0; font-size: 16px; font-weight: 600; }
+.crime-source-list p { margin: 10px 0 0; color: var(--secondary); font-size: 13px; }
+.crime-definitions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 36px; }
+.crime-definitions p { font-size: 13px; margin: 0; padding: 18px 0; border-bottom: 1px solid var(--border); }
+.crime-downloads { display: flex; flex-wrap: wrap; gap: 10px; }
+.crime-downloads a { border: 1px solid var(--border-strong); border-radius: 8px; padding: 12px 16px; font-size: 13px; background: var(--surface); text-decoration: none; }
+.crime-downloads a:hover { background: var(--control-hover); }
+.crime-footer { margin-top: 56px; border-top: 1px solid var(--border-strong); padding: 24px 0 12px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 11px; }
+.crime-footer strong { display: block; font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+.crime-footer span { color: var(--secondary); }
+.crime-footer-links { display: flex; gap: 24px; align-items: center; }
+@media(max-width:760px) {
+ .crime-kpis,.crime-small-grid,.crime-definitions { grid-template-columns: 1fr; }
+ .crime-reading { padding-left: 12px; }
+ .crime-reading p { font-size: 13px; }
+ .crime-source-list article { gap: 12px; }
+ .crime-meta { font-size: 11px; }
+ .crime-footer { margin-top: 36px; }
+}

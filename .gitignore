@@ -1,0 +1,10 @@
+node_modules/
+app/dist/
+app/.data-app-offline/
+app/.openai/
+__pycache__/
+*.pyc
+.DS_Store
+test-results/
+.env
+.env.*

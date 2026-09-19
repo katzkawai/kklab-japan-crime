@@ -1,0 +1,31 @@
+name: Verify and deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Reproduce and reconcile official data
+        run: python3 scripts/prepare_data.py
+      - name: Verify public artifacts
+        run: python3 scripts/verify_site.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

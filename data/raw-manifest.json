@@ -1,0 +1,38 @@
+[
+  {
+    "file": "data/raw/crime-2025-fraud.xlsx",
+    "url": "https://www.npa.go.jp/toukei/seianki/R07/r07_2-3.xlsx",
+    "sha256": "04163a91782575c6edc8d29c7ebf8fcabd25be47529172d721f37852aa547ef8",
+    "retrievedAt": "2026-09-20"
+  },
+  {
+    "file": "data/raw/crime-2025-summary.xlsx",
+    "url": "https://www.npa.go.jp/toukei/seianki/R07/r07_1.xlsx",
+    "sha256": "9d0f25831974f262711021879672646b2cb33418a8c2b03df4d810c2d6a40b07",
+    "retrievedAt": "2026-09-20"
+  },
+  {
+    "file": "data/raw/crime-2025.csv",
+    "url": "https://www.npa.go.jp/toukei/seianki/R07/r07.csv",
+    "sha256": "ae2b334713722cb350fb2d6dfa73861d5ce74e66c463b3af5611d60fb56c6c7a",
+    "retrievedAt": "2026-09-20"
+  },
+  {
+    "file": "data/raw/crime-situation-2025-final.pdf",
+    "url": "https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf",
+    "sha256": "e7f6c1194a93cadbef6e030b22d32f55311222f7aa65ddc6efe241f19fbf6a4a",
+    "retrievedAt": "2026-09-20"
+  },
+  {
+    "file": "data/raw/whitepaper-2025-2-1.csv",
+    "url": "https://www.npa.go.jp/hakusyo/r07/honbun/csv/bb2z00010.csv",
+    "sha256": "6ccf066e3b91d3d92134f460cc77571bd5be52208df3fdc7c7479455edfea374",
+    "retrievedAt": "2026-09-20"
+  },
+  {
+    "file": "data/raw/whitepaper-definitions.html",
+    "url": "https://www.npa.go.jp/hakusyo/r07/honbun/html/bbh000000.html",
+    "sha256": "b88bee80cc7e1b5e3a5b5f04860bd52172cc18d3f13713cc638ca800066a467b",
+    "retrievedAt": "2026-09-20"
+  }
+]
