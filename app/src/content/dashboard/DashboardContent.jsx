@@ -17,7 +17,27 @@ function SourceLink({children='警察庁・元データ',href=URL}) { return <a 
 function Chart({id,queryId,title,rows,spec,height=300,children,...props}) {
  return <EvidenceChart id={id} queryId={queryId} title={title} variant="card" rows={rows} sourceRows={props.sourceRows||rows} spec={spec} height={height} {...props}>{children}</EvidenceChart>;
 }
-function National({queries}) {
+function CrimePerception({queries,metadata}) {
+ const national=queries.national.rows, cats=queries.categories.rows;
+ const peak=national.find(r=>r.年===2002),latest=national.find(r=>r.年===2025),past=national.find(r=>r.年===2019);
+ const knowledge=cats.filter(r=>r.罪種==='知能犯'&&[2019,2025].includes(r.年));
+ const before=knowledge.find(r=>r.年===2019),now=knowledge.find(r=>r.年===2025);
+ const survey=metadata.perception;
+ return <section id="crime-perception" className="crime-essay">
+  <Section id="perception-heading" title="考察｜知能犯の増加は、体感治安にどう影響するか">
+   <p className="crime-essay-label">公開統計と意識調査を踏まえた、本ページの考察</p>
+   <p className="crime-essay-lead">詐欺を中心とする知能犯の増加は、犯罪総数の長期的な減少とは別に、「自分も被害に遭うかもしれない」という危機感を強めている可能性があります。件数の変化に加え、被害の性質や犯罪情報への接触が、体感治安にどう関わるかを見る必要があります。</p>
+   <DataComponent id="perception-counts" queryId="national" queryIds={['national','categories']} title="総数と知能犯の比較" kind="custom" showHeading={false} displayRows={[{指標:'刑法犯総数',年:2025,認知件数:latest.認知件数},{指標:'知能犯',年:2025,認知件数:now.認知件数}]} sourceRowsByQuery={{national:[peak,past,latest],categories:knowledge}}>
+    <p data-reviewed-rows>刑法犯総数は2025年に {fmt(latest.認知件数)} 件で、2002年の最多時から {fmt((1-latest.認知件数/peak.認知件数)*100,1)}% 減っています。一方、知能犯は2019年の {fmt(before.認知件数)} 件から2025年の {fmt(now.認知件数)} 件へ {fmt((now.認知件数/before.認知件数-1)*100,1)}% 増えました。ただし、総数も2022年から4年連続で増加し、2019年比では {pct(latest.認知件数,past.認知件数)} です。「総数の長期的な減少」と「直近の増加」は、期間を分けて読む必要があります。<SourceLink>件数の出典</SourceLink></p>
+   </DataComponent>
+   <p>知能犯は詐欺・横領・偽造・汚職・背任などを含む統計区分で、2025年には詐欺が9割以上を占めます。電話やSNSを介して日常生活に入り込む詐欺では、被害の大きさや相手を見抜く難しさが意識されやすいと考えられます。そうした事件の情報に繰り返し接することで、犯罪総数の変化以上に身近な脅威として受け止められ、危機感が増幅されるという見方ができます。<SourceLink href="https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf#page=6">知能犯の定義・詐欺の内訳</SourceLink></p>
+   <p data-reviewed-rows>この見方と整合的な回答もあります。警察庁の{survey.period}の意識調査では、回答者全体の {fmt(survey.worsenedOverTenYearsPct,1)}% が、ここ10年で治安が悪くなったと回答しました。その回答者のうち、悪化を連想させる犯罪に詐欺を挙げた人は {fmt(survey.amongWorsened.fraudPct,1)}%、悪化したと思う理由としてテレビ・新聞の犯罪報道を見る機会の増加を挙げた人は {fmt(survey.amongWorsened.tvNewspaperPct,1)}%、ネットニュースでは {fmt(survey.amongWorsened.internetNewsPct,1)}% でした。<SourceLink href={survey.source}>調査結果・本文24頁の図42と注39</SourceLink></p>
+   <p>ただし、これは回答者が挙げた理由であり、知能犯の増加や報道が不安を強めた因果関係を証明するものではありません。報道が実際にどの程度増えたかも、この調査だけでは分かりません。詐欺の件数や被害額は実際に増えており、危機感を単なる思い込みとして扱うことも適切ではありません。長期の総数、近年の罪種別の変化、被害の深刻さ、情報への接触を併せて読むことで、実際のリスクと体感治安の関係を考えることができます。</p>
+   <Footnote>調査は全国の{survey.minimumAge}歳以上 {fmt(survey.sampleSize)} 人が対象。{survey.method} 上記の割合は被害率ではありません。数値は警察庁の公表値、危機感を増幅させる仕組みについての記述は本ページの解釈です。<SourceLink href={survey.methodSource}>調査方法・本文1頁注2</SourceLink></Footnote>
+  </Section>
+ </section>;
+}
+function National({queries,metadata}) {
  const all=queries.national.rows,cats=queries.categories.rows;
  const [period,setPeriod]=useState('1946'),[measure,setMeasure]=useState('認知件数');
  const selected=all.filter(r=>r.年>=Number(period));
@@ -34,6 +54,7 @@ function National({queries}) {
   <DataComponent id="national-reading" queryId="national" title="長期と直近の動き" kind="custom" showHeading={false} displayRows={[peak,low,past,latest]} sourceRows={[peak,low,past,latest]} className="crime-reading">
    <p><strong>長期の減少の後、2022年から増加。</strong>2025年は、戦後最少の2021年から {pct(latest.認知件数,low.認知件数)}、2019年から {pct(latest.認知件数,past.認知件数)} となっています。</p>
   </DataComponent>
+  <p className="crime-note"><a href="#crime-perception">知能犯の増加と体感治安についての考察を読む ↓</a></p>
   <Section id="long-term-heading" title="刑法犯の長期推移" spacing="after-metrics" filters={<>
    <Dropdown label="表示期間" showLabel value={period} choices={['1946','1989','2002','2016']} choiceLabels={{1946:'1946年から',1989:'1989年から',2002:'2002年から',2016:'2016年から'}} onChange={setPeriod}/>
    <Dropdown label="指標" showLabel value={measure} choices={['認知件数','人口千人当たり','検挙件数','検挙率']} onChange={setMeasure}/>
@@ -53,6 +74,7 @@ function National({queries}) {
     <Footnote>表示のKは千件を表します。総数の増加 {fmt(latest.認知件数-last.認知件数)} 件のうち、知能犯と窃盗犯が {fmt((deltas.find(r=>r.罪種==='知能犯').増減件数+deltas.find(r=>r.罪種==='窃盗犯').増減件数)/(latest.認知件数-last.認知件数)*100,1)}% を占めます。これは件数の内訳であり、増加原因の推定ではありません。</Footnote>
    </Chart>
   </Section>
+  <CrimePerception queries={queries} metadata={metadata}/>
  </>;
 }
 function Types({queries,metadata}) {
@@ -108,7 +130,7 @@ function Sources({metadata}) {
    <div className="crime-source-list">
     <article><span>01</span><div><h3><SourceLink>令和7年の刑法犯に関する統計資料</SourceLink></h3><p>主要な数値の出典。全国1946–2025年、包括罪種2002–2025年、主な罪名・47都道府県2016–2025年。図表1-1-1、1-2-1～7、1-5-1～2、2-3-6～7を使用。</p></div></article>
     <article><span>02</span><div><h3><SourceLink href="https://www.npa.go.jp/hakusyo/r07/honbun/html/bb2211000.html">令和7年版 警察白書・第2章第1節</SourceLink></h3><p>図表2-1のCSVと、全国の1952–2024年の認知件数・検挙件数・検挙人員・検挙率を照合。73年×4指標の292値が一致。</p></div></article>
-    <article><span>03</span><div><h3><SourceLink href="https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf">令和7年の犯罪情勢（確定値・PDF）</SourceLink></h3><p>2026年8月27日更新。2025年の総数と前年比、人口の基準時点、性犯罪の法改正や詐欺の集計範囲を確認。</p></div></article>
+    <article><span>03</span><div><h3><SourceLink href="https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf">令和7年の犯罪情勢（確定値・PDF）</SourceLink></h3><p>2026年8月27日更新。2025年の総数と前年比、人口の基準時点、性犯罪の法改正や詐欺の集計範囲を確認。体感治安の考察には本文24頁の図42・注39、調査方法には本文1頁注2を参照。</p></div></article>
    </div>
   </Section>
   <Section id="reading-heading" title="統計を読むときの注意">
@@ -127,7 +149,7 @@ export function DashboardContent() {
  const {activeTabId}=useDashboardTabs(TABS);
  const tab=TABS.some(t=>t.id===activeTabId)?activeTabId:'national';
  return <div className="crime-page">
-  {tab==='national'&&<National queries={queries}/>}{tab==='types'&&<Types queries={queries} metadata={snapshot.metadata}/>}{tab==='regions'&&<Regions queries={queries}/>}{tab==='sources'&&<Sources metadata={snapshot.metadata}/>}
+  {tab==='national'&&<National queries={queries} metadata={snapshot.metadata}/>}{tab==='types'&&<Types queries={queries} metadata={snapshot.metadata}/>}{tab==='regions'&&<Regions queries={queries}/>}{tab==='sources'&&<Sources metadata={snapshot.metadata}/>}
   <footer className="crime-footer"><div><strong>このページは GPT 6 Astro で作成されました。</strong><span>統計出典：警察庁 ／ 資料確認日：2026年9月20日</span></div><div className="crime-footer-links"><a href={REPO} target="_blank" rel="noreferrer">GitHub ↗</a><SourceLink>出典資料</SourceLink></div></footer>
  </div>;
 }

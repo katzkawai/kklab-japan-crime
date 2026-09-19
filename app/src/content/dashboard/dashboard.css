@@ -7,6 +7,12 @@
 .crime-reading p { margin: 0; font-size: 15px; }
 .crime-reading strong { color: var(--chart-1); margin-right: .4em; }
 .crime-note { color: var(--secondary); font-size: 12px; margin: 12px 0 0; line-height: 1.85; }
+.crime-essay { scroll-margin-top: 100px; }
+.crime-essay p { max-width: 960px; margin: 0; font-size: 14px; line-height: 1.95; }
+.crime-essay .crime-essay-label { color: var(--secondary); font-size: 11px; letter-spacing: .04em; }
+.crime-essay .crime-essay-lead { border-left: 3px solid var(--chart-2); padding-left: 18px; font-size: 16px; font-weight: 500; }
+.crime-essay .crime-note { font-size: 12px; }
+.crime-essay a { font-size: 12px; margin-left: .5em; }
 .crime-chart-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 11px; color: var(--secondary); margin-top: 12px; }
 .crime-small-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
 .crime-mini-value { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); padding-top: 14px; }

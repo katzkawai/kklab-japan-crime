@@ -5215,6 +5215,22 @@
       "1972年以前の数値は、1972年5月14日以前の沖縄県の該当分を含まない（警察白書・凡例）。"
     ],
     "sexCaveat": "性犯罪は2017年・2023年の法改正により名称・構成要件・対象範囲が変化。旧罪名の数値を含むため、改正前後の単純比較には注意。性的姿態撮影等処罰法の罪は2023年から風俗犯に計上。",
-    "fraudCaveat": "特殊詐欺にはキャッシュカード詐欺盗を含む。詐欺・窃盗等と重なる切り口なので、刑法犯総数や詐欺の件数へ足し合わせない。SNS型ロマンス詐欺の2023年の調査対象は相手が外国人または海外居住者を名乗ったものに限られる。"
+    "fraudCaveat": "特殊詐欺にはキャッシュカード詐欺盗を含む。詐欺・窃盗等と重なる切り口なので、刑法犯総数や詐欺の件数へ足し合わせない。SNS型ロマンス詐欺の2023年の調査対象は相手が外国人または海外居住者を名乗ったものに限られる。",
+    "perception": {
+      "source": "https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf#page=27",
+      "methodSource": "https://www.npa.go.jp/publications/statistics/crime/situation/r7_hanzaijyosei_kakuteichi.pdf#page=4",
+      "period": "2025年10月",
+      "sampleSize": 5000,
+      "minimumAge": 15,
+      "method": "インターネット調査。年代・性別・都道府県別の回答者構成を2020年国勢調査に準拠。",
+      "worsenedOverTenYearsPct": 79.7,
+      "amongWorsened": {
+        "fraudPct": 72.0,
+        "tvNewspaperPct": 76.4,
+        "internetNewsPct": 61.1
+      },
+      "denominator": "79.7%は全回答者。72.0%・76.4%・61.1%は、ここ10年で治安が悪くなった旨を回答した人。",
+      "provenance": "原本 data/raw/crime-situation-2025-final.pdf、本文1頁注2・24頁図42と注39から手作業で転記・確認。因果効果の推計値ではない。"
+    }
   }
 }

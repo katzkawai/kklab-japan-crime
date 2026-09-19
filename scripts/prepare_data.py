@@ -193,6 +193,18 @@ CAVEATS = [
 SEX = '性犯罪は2017年・2023年の法改正により名称・構成要件・対象範囲が変化。旧罪名の数値を含むため、改正前後の単純比較には注意。性的姿態撮影等処罰法の罪は2023年から風俗犯に計上。'
 FRAUD_NOTE = '特殊詐欺にはキャッシュカード詐欺盗を含む。詐欺・窃盗等と重なる切り口なので、刑法犯総数や詐欺の件数へ足し合わせない。SNS型ロマンス詐欺の2023年の調査対象は相手が外国人または海外居住者を名乗ったものに限られる。'
 
+# Manually reviewed against the final PDF, body pp. 1 (note 2), 24 (figure 42,
+# note 39). Keep survey responses distinct from police-recorded crime counts.
+PERCEPTION = {
+    'source': PDF + '#page=27', 'methodSource': PDF + '#page=4',
+    'period': '2025年10月', 'sampleSize': 5000, 'minimumAge': 15,
+    'method': 'インターネット調査。年代・性別・都道府県別の回答者構成を2020年国勢調査に準拠。',
+    'worsenedOverTenYearsPct': 79.7,
+    'amongWorsened': {'fraudPct': 72.0, 'tvNewspaperPct': 76.4, 'internetNewsPct': 61.1},
+    'denominator': '79.7%は全回答者。72.0%・76.4%・61.1%は、ここ10年で治安が悪くなった旨を回答した人。',
+    'provenance': '原本 data/raw/crime-situation-2025-final.pdf、本文1頁注2・24頁図42と注39から手作業で転記・確認。因果効果の推計値ではない。',
+}
+
 
 def source(label, table, period, caveats=None, excel=False):
     files = [{'label': '令和7年の刑法犯に関する統計資料 ' + table, 'href': INDEX},
@@ -236,7 +248,7 @@ snapshot = {
     'id': 'japan-crime-npa-2025', 'surface': 'dashboard', 'title': '日本の犯罪の推移',
     'generatedAt': '2026-09-20T00:00:00Z', 'buildStatus': 'creating', 'status': 'reviewed',
     'filters': [], 'queries': queries,
-    'metadata': {'creator': 'このページは GPT 6 Astro で作成されました。', 'dataThrough': 2025, 'retrievedAt': RETRIEVED, 'sources': [INDEX, PDF, WHITEPAPER], 'caveats': CAVEATS, 'sexCaveat': SEX, 'fraudCaveat': FRAUD_NOTE},
+    'metadata': {'creator': 'このページは GPT 6 Astro で作成されました。', 'dataThrough': 2025, 'retrievedAt': RETRIEVED, 'sources': [INDEX, PDF, WHITEPAPER], 'caveats': CAVEATS, 'sexCaveat': SEX, 'fraudCaveat': FRAUD_NOTE, 'perception': PERCEPTION},
 }
 (OUT / 'reviewed.json').write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + '\n')
 for key, query in queries.items():

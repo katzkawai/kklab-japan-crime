@@ -13,6 +13,12 @@ try {
  assert.match(await component('latest-clearance').innerText(),/38.9%/);
  assert.equal(await component('category-change').locator('.chart-ranked-list-row').count(),6);
  assert.match(await page.locator('footer').innerText(),/GPT 6 Astro/);
+ await page.getByRole('link',{name:'知能犯の増加と体感治安についての考察を読む ↓',exact:true}).click();
+ const essay=page.locator('#crime-perception');
+ await essay.getByRole('heading',{name:'考察｜知能犯の増加は、体感治安にどう影響するか',exact:true}).waitFor();
+ assert.match(await essay.innerText(),/79\.7%[\s\S]*72\.0%[\s\S]*76\.4%[\s\S]*61\.1%/);
+ assert.match(await essay.innerText(),/因果関係を証明するものではありません/);
+ if(process.env.CAPTURE_DIR) await essay.screenshot({path:`${process.env.CAPTURE_DIR}/crime-essay.png`});
  await choose('表示期間','2016年から');
  await page.getByRole('heading',{name:'認知件数 · 2016–2025年',exact:true}).waitFor();
  await page.getByRole('button',{name:'認知件数 · 2016–2025年 actions',exact:true}).click();
@@ -59,5 +65,5 @@ try {
   }
  }
  assert.deepEqual(errors,[]);
- console.log('PASS: 4 views, 2 viewport widths, chart marks, period reset, metric/index/region changes, source inspector, 5 CSV downloads, attribution, no runtime errors.');
+ console.log('PASS: 4 views, 2 viewport widths, chart marks, period reset, metric/index/region changes, source inspector, 5 CSV downloads, crime-perception essay and sources, attribution, no runtime errors.');
 } finally {await browser.close();}

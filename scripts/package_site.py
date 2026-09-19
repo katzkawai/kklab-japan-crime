@@ -21,7 +21,7 @@ assert not re.search(r'<meta[^>]+name="data-app-local-thread"', html)
 metadata = '''<meta name="description" content="警察庁の白書・確定統計から、日本の刑法犯の1946〜2025年の推移、罪種別、詐欺被害額、47都道府県を可視化。出典・CSV付き。GPT 6 Astroで作成。">
 <meta name="author" content="GPT 6 Astro">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="canonical" href="https://katzkawai.github.io/kklab-japan-crime/">
+<link rel="canonical" href="https://katzkawai.org/kklab-japan-crime/">
 <meta property="og:title" content="日本の犯罪の推移｜警察庁統計の可視化">
 <meta property="og:description" content="長期の減少と近年の増加を、公式統計から読み解く。1946〜2025年の刑法犯・罪種・詐欺・都道府県別の推移。">
 <meta property="og:type" content="website">

@@ -29,6 +29,7 @@ else:
 assert snapshot['buildStatus'] == 'complete'
 reviewed = json.loads((ROOT / 'data/reviewed.json').read_text())
 assert snapshot['queries'] == reviewed['queries']
+assert snapshot['metadata'] == reviewed['metadata']
 for name, query in reviewed['queries'].items():
     data = list(csv.DictReader((site / 'data' / f'{name}.csv').open(encoding='utf-8-sig')))
     assert len(data) == len(query['rows']), name
